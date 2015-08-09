@@ -1,0 +1,24 @@
+{
+    "name": "icepay/icepay",
+    "description": "ICEPAY library to integrate ICEPAY in your projects.",
+    "homepage": "https://icepay.com/",
+    "type":"library",
+    "keywords": ["icepay", "payment", "api"],
+    "license":"MIT",
+    "require":{
+        "php":"~5.3"
+    },
+    "require-dev":{
+        "phpunit/phpunit": "~4.7@stable"
+    },
+    "autoload":{
+        "psr-4":{
+            "Icepay\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Icepay\\":"tests/"
+        }
+    }
+}
