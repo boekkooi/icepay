@@ -39,6 +39,15 @@ class CheckoutExtendedRequestType extends CheckoutRequestType
         return $this;
     }
 
-
+    /**
+     * @inheritdoc
+     */
+    public function getChecksumData()
+    {
+        return array_merge(
+            parent::getChecksumData(),
+            $this->XML
+        );
+    }
 }
 

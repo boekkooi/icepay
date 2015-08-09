@@ -39,6 +39,17 @@ class CheckoutWithPINRequestType extends CheckoutRequestType
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getChecksumData()
+    {
+        return array_merge(
+            parent::getChecksumData(),
+            $this->PINCode
+        );
+    }
+
 
 }
 

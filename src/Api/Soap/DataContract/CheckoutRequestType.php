@@ -172,6 +172,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function getEndUserIP()
     {
+        // return $_SERVER['REMOTE_ADDR']; TODO change!!!! see symfony code base
         return $this->EndUserIP;
     }
 
@@ -361,6 +362,27 @@ class CheckoutRequestType extends BaseTypeType
     {
         $this->URLError = $URLError;
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getChecksumData()
+    {
+        return [
+            $this->getAmount(),
+            $this->getCountry(),
+            $this->getCurrency(),
+            $this->getDescription(),
+            $this->getEndUserIP(),
+            $this->getIssuer(),
+            $this->getLanguage(),
+            $this->getOrderID(),
+            $this->getPaymentMethod(),
+            $this->getReference(),
+            $this->getURLCompleted(),
+            $this->getURLError()
+        ];
     }
 
 

@@ -633,6 +633,36 @@ class GetPaymentResponseType extends BaseTypeType
         return $this;
     }
 
-
+    /**
+     * @inheritDoc
+     */
+    protected function getChecksumData()
+    {
+        return [
+            $this->getPaymentID(),
+            $this->getAmount(),
+            $this->getConsumerAccountNumber(),
+            $this->getConsumerAddress(),
+            $this->getConsumerCity(),
+            $this->getConsumerCountry(),
+            $this->getConsumerEmail(),
+            $this->getConsumerHouseNumber(),
+            $this->getConsumerIPAddress(),
+            $this->getConsumerName(),
+            $this->getConsumerPhoneNumber(),
+            $this->getCurrency(),
+            $this->getDescription(),
+            $this->getDuration(),
+            $this->getIssuer(),
+            $this->getOrderID(),
+            $this->getOrderTime(),
+            $this->getPaymentMethod(),
+            $this->getPaymentTime(),
+            $this->getReference(),
+            $this->getStatus(),
+            $this->getStatusCode(),
+            $this->getTestMode(),
+        ];
+    }
 }
 

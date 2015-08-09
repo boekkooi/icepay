@@ -93,6 +93,16 @@ class AutomaticCheckoutResponseType extends BaseTypeType
         return $this;
     }
 
-
+    /**
+     * @inheritDoc
+     */
+    protected function getChecksumData()
+    {
+        return [
+            $this->getErrorDescription(),
+            $this->getPaymentID(),
+            $this->getSuccess()
+        ];
+    }
 }
 

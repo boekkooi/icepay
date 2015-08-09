@@ -444,6 +444,29 @@ class CheckoutResponseType extends BaseTypeType
         return $this;
     }
 
-
+    /**
+     * @inheritdoc
+     */
+    public function getChecksumData()
+    {
+        return [
+            $this->getAmount(),
+            $this->getCountry(),
+            $this->getCurrency(),
+            $this->getDescription(),
+            $this->getEndUserIP(),
+            $this->getIssuer(),
+            $this->getLanguage(),
+            $this->getOrderID(),
+            $this->getPaymentID(),
+            $this->getPaymentMethod(),
+            $this->getPaymentScreenURL(),
+            $this->getProviderTransactionID(),
+            $this->getReference(),
+            $this->getTestMode(),
+            $this->getURLCompleted(),
+            $this->getURLError()
+        ];
+    }
 }
 

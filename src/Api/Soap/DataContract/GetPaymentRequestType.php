@@ -39,6 +39,14 @@ class GetPaymentRequestType extends BaseTypeType
         return $this;
     }
 
-
+    /**
+     * @inheritdoc
+     */
+    public function getChecksumData()
+    {
+        return [
+            $this->getPaymentID()
+        ];
+    }
 }
 

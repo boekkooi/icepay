@@ -8,6 +8,7 @@ namespace Icepay\Api\Soap\DataContract;
  *
  *
  * @see http://schemas.datacontract.org/2004/07/APIService#AutomaticCheckoutRequest
+ * TODO what are cTimeStamp, checksuum and merchnatID for?
  */
 class AutomaticCheckoutRequestType extends CheckoutRequestType
 {

@@ -66,6 +66,15 @@ class ValidateSmsCodeRequestType extends BaseTypeType
         return $this;
     }
 
-
+    /**
+     * @inheritDoc
+     */
+    protected function getChecksumData()
+    {
+        return [
+            $this->getPaymentID(),
+            $this->getSmsCode()
+        ];
+    }
 }
 
