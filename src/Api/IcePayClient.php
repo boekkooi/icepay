@@ -1,73 +1,56 @@
 <?php
 namespace Icepay\Api;
 
-use Icepay\Api\IcePay\AutomaticCheckout;
+use Icepay\Api\DataContract\AutomaticCheckoutRequestType;
+use Icepay\Api\DataContract\BaseTypeType;
+use Icepay\Api\DataContract\CheckoutExtendedRequestType;
+use Icepay\Api\DataContract\CheckoutRequestType;
+use Icepay\Api\DataContract\CheckoutWithPINRequestType;
+use Icepay\Api\DataContract\GetPaymentRequestType;
+use Icepay\Api\DataContract\GetPhoneStatusRequestType;
+use Icepay\Api\DataContract\ValidatePhoneCodeRequestType;
+use Icepay\Api\DataContract\ValidateSmsCodeRequestType;
+use Icepay\Api\DataContract\VaultCheckoutRequestType;
 use Icepay\Api\IcePay\AutomaticCheckoutResponse;
-use Icepay\Api\IcePay\Checkout;
-use Icepay\Api\IcePay\CheckoutExtended;
 use Icepay\Api\IcePay\CheckoutExtendedResponse;
 use Icepay\Api\IcePay\CheckoutResponse;
-use Icepay\Api\IcePay\GetMyPaymentMethods;
 use Icepay\Api\IcePay\GetMyPaymentMethodsResponse;
-use Icepay\Api\IcePay\GetPayment;
 use Icepay\Api\IcePay\GetPaymentResponse;
-use Icepay\Api\IcePay\GetPhoneStatus;
 use Icepay\Api\IcePay\GetPhoneStatusResponse;
-use Icepay\Api\IcePay\GetPremiumRateNumbers;
 use Icepay\Api\IcePay\GetPremiumRateNumbersResponse;
-use Icepay\Api\IcePay\PhoneCheckout;
 use Icepay\Api\IcePay\PhoneCheckoutResponse;
-use Icepay\Api\IcePay\PhoneDirectCheckout;
 use Icepay\Api\IcePay\PhoneDirectCheckoutResponse;
-use Icepay\Api\IcePay\SMSCheckout;
 use Icepay\Api\IcePay\SMSCheckoutResponse;
-use Icepay\Api\IcePay\ValidatePhoneCode;
 use Icepay\Api\IcePay\ValidatePhoneCodeResponse;
-use Icepay\Api\IcePay\ValidateSmsCode;
 use Icepay\Api\IcePay\ValidateSmsCodeResponse;
-use Icepay\Api\IcePay\VaultCheckout;
 use Icepay\Api\IcePay\VaultCheckoutResponse;
 use SoapClient;
 
 class IcePayClient extends SoapClient
 {
-
     private static $classMap = array(
-        'Checkout' => Checkout::class,
         'CheckoutResponse' => CheckoutResponse::class,
-        'VaultCheckout' => VaultCheckout::class,
         'VaultCheckoutResponse' => VaultCheckoutResponse::class,
-        'AutomaticCheckout' => AutomaticCheckout::class,
         'AutomaticCheckoutResponse' => AutomaticCheckoutResponse::class,
-        'CheckoutExtended' => CheckoutExtended::class,
         'CheckoutExtendedResponse' => CheckoutExtendedResponse::class,
-        'SMSCheckout' => SMSCheckout::class,
         'SMSCheckoutResponse' => SMSCheckoutResponse::class,
-        'PhoneCheckout' => PhoneCheckout::class,
         'PhoneCheckoutResponse' => PhoneCheckoutResponse::class,
-        'PhoneDirectCheckout' => PhoneDirectCheckout::class,
         'PhoneDirectCheckoutResponse' => PhoneDirectCheckoutResponse::class,
-        'ValidatePhoneCode' => ValidatePhoneCode::class,
         'ValidatePhoneCodeResponse' => ValidatePhoneCodeResponse::class,
-        'GetPhoneStatus' => GetPhoneStatus::class,
         'GetPhoneStatusResponse' => GetPhoneStatusResponse::class,
-        'ValidateSmsCode' => ValidateSmsCode::class,
         'ValidateSmsCodeResponse' => ValidateSmsCodeResponse::class,
-        'GetPayment' => GetPayment::class,
         'GetPaymentResponse' => GetPaymentResponse::class,
-        'GetPremiumRateNumbers' => GetPremiumRateNumbers::class,
         'GetPremiumRateNumbersResponse' => GetPremiumRateNumbersResponse::class,
-        'GetMyPaymentMethods' => GetMyPaymentMethods::class,
         'GetMyPaymentMethodsResponse' => GetMyPaymentMethodsResponse::class,
-        'CheckoutRequest' => \Icepay\Api\DataContract\CheckoutRequestType::class,
+        'CheckoutRequest' => CheckoutRequestType::class,
         'http://schemas.datacontract.org/2004/07/APIService#CheckoutResponse' => \Icepay\Api\DataContract\CheckoutResponseType::class,
-        'VaultCheckoutRequest' => \Icepay\Api\DataContract\VaultCheckoutRequestType::class,
-        'AutomaticCheckoutRequest' => \Icepay\Api\DataContract\AutomaticCheckoutRequestType::class,
+        'VaultCheckoutRequest' => VaultCheckoutRequestType::class,
+        'AutomaticCheckoutRequest' => AutomaticCheckoutRequestType::class,
         'http://schemas.datacontract.org/2004/07/APIService#AutomaticCheckoutResponse' => \Icepay\Api\DataContract\AutomaticCheckoutResponseType::class,
-        'CheckoutExtendedRequest' => \Icepay\Api\DataContract\CheckoutExtendedRequestType::class,
+        'CheckoutExtendedRequest' => CheckoutExtendedRequestType::class,
         'http://schemas.datacontract.org/2004/07/APIService#SMSCheckoutResponse' => \Icepay\Api\DataContract\SMSCheckoutResponseType::class,
         'http://schemas.datacontract.org/2004/07/APIService#PhoneCheckoutResponse' => \Icepay\Api\DataContract\PhoneCheckoutResponseType::class,
-        'CheckoutWithPINRequest' => \Icepay\Api\DataContract\CheckoutWithPINRequestType::class,
+        'CheckoutWithPINRequest' => CheckoutWithPINRequestType::class,
         'http://schemas.datacontract.org/2004/07/APIService#PhoneDirectCheckoutResponse' => \Icepay\Api\DataContract\PhoneDirectCheckoutResponseType::class,
         'ValidatePhoneCodeRequest' => \Icepay\Api\DataContract\ValidatePhoneCodeRequestType::class,
         'http://schemas.datacontract.org/2004/07/APIService#ValidatePhoneCodeResponse' => \Icepay\Api\DataContract\ValidatePhoneCodeResponseType::class,
@@ -101,122 +84,187 @@ class IcePayClient extends SoapClient
     }
 
     /**
-     * @param Checkout $parameters
+     * @param CheckoutRequestType $parameters
      * @return CheckoutResponse
      */
-    public function Checkout(Checkout $parameters)
+    public function Checkout(CheckoutRequestType $parameters)
     {
-        return $this->__soapCall('Checkout', array($parameters));
+        return $this->__soapCall(
+            'Checkout',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param VaultCheckout $parameters
+     * @param VaultCheckoutRequestType $parameters
      * @return VaultCheckoutResponse
      */
-    public function VaultCheckout(VaultCheckout $parameters)
+    public function VaultCheckout(VaultCheckoutRequestType $parameters)
     {
-        return $this->__soapCall('VaultCheckout', array($parameters));
+        return $this->__soapCall(
+            'VaultCheckout',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param AutomaticCheckout $parameters
+     * @param AutomaticCheckoutRequestType $parameters
      * @return AutomaticCheckoutResponse
      */
-    public function AutomaticCheckout(AutomaticCheckout $parameters)
+    public function AutomaticCheckout(AutomaticCheckoutRequestType $parameters)
     {
-        return $this->__soapCall('AutomaticCheckout', array($parameters));
+        return $this->__soapCall(
+            'AutomaticCheckout',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param CheckoutExtended $parameters
+     * @param CheckoutExtendedRequestType $parameters
      * @return CheckoutExtendedResponse
      */
-    public function CheckoutExtended(CheckoutExtended $parameters)
+    public function CheckoutExtended(CheckoutExtendedRequestType $parameters)
     {
-        return $this->__soapCall('CheckoutExtended', array($parameters));
+        return $this->__soapCall(
+            'CheckoutExtended',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param SMSCheckout $parameters
+     * @param CheckoutRequestType $parameters
      * @return SMSCheckoutResponse
      */
-    public function SMSCheckout(SMSCheckout $parameters)
+    public function SMSCheckout(CheckoutRequestType $parameters)
     {
-        return $this->__soapCall('SMSCheckout', array($parameters));
+        return $this->__soapCall(
+            'SMSCheckout',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param PhoneCheckout $parameters
+     * @param CheckoutRequestType $parameters
      * @return PhoneCheckoutResponse
      */
-    public function PhoneCheckout(PhoneCheckout $parameters)
+    public function PhoneCheckout(CheckoutRequestType $parameters)
     {
-        return $this->__soapCall('PhoneCheckout', array($parameters));
+        return $this->__soapCall(
+            'PhoneCheckout',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param PhoneDirectCheckout $parameters
+     * @param CheckoutWithPINRequestType $parameters
      * @return PhoneDirectCheckoutResponse
      */
-    public function PhoneDirectCheckout(PhoneDirectCheckout $parameters)
+    public function PhoneDirectCheckout(CheckoutWithPINRequestType $parameters)
     {
-        return $this->__soapCall('PhoneDirectCheckout', array($parameters));
+        return $this->__soapCall(
+            'PhoneDirectCheckout',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param ValidatePhoneCode $parameters
+     * @param ValidatePhoneCodeRequestType $parameters
      * @return ValidatePhoneCodeResponse
      */
-    public function ValidatePhoneCode(ValidatePhoneCode $parameters)
+    public function ValidatePhoneCode(ValidatePhoneCodeRequestType $parameters)
     {
-        return $this->__soapCall('ValidatePhoneCode', array($parameters));
+        return $this->__soapCall(
+            'ValidatePhoneCode',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param GetPhoneStatus $parameters
+     * TODO find docs
+     *
+     * @param GetPhoneStatusRequestType $parameters
      * @return GetPhoneStatusResponse
      */
-    public function GetPhoneStatus(GetPhoneStatus $parameters)
+    public function GetPhoneStatus(GetPhoneStatusRequestType $parameters)
     {
-        return $this->__soapCall('GetPhoneStatus', array($parameters));
+        return $this->__soapCall(
+            'GetPhoneStatus',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param ValidateSmsCode $parameters
+     * @param ValidateSmsCodeRequestType $parameters
      * @return ValidateSmsCodeResponse
      */
-    public function ValidateSmsCode(ValidateSmsCode $parameters)
+    public function ValidateSmsCode(ValidateSmsCodeRequestType $parameters)
     {
-        return $this->__soapCall('ValidateSmsCode', array($parameters));
+        return $this->__soapCall(
+            'ValidateSmsCode',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param GetPayment $parameters
+     * @param GetPaymentRequestType $parameters
      * @return GetPaymentResponse
      */
-    public function GetPayment(GetPayment $parameters)
+    public function GetPayment(GetPaymentRequestType $parameters)
     {
-        return $this->__soapCall('GetPayment', array($parameters));
+        return $this->__soapCall(
+            'GetPayment',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param GetPremiumRateNumbers $parameters
+     * @param BaseTypeType $parameters
      * @return GetPremiumRateNumbersResponse
      */
-    public function GetPremiumRateNumbers(GetPremiumRateNumbers $parameters)
+    public function GetPremiumRateNumbers(BaseTypeType $parameters)
     {
-        return $this->__soapCall('GetPremiumRateNumbers', array($parameters));
+        return $this->__soapCall(
+            'GetPremiumRateNumbers',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
 
     /**
-     * @param GetMyPaymentMethods $parameters
+     * @param BaseTypeType $parameters
      * @return GetMyPaymentMethodsResponse
      */
-    public function GetMyPaymentMethods(GetMyPaymentMethods $parameters)
+    public function GetMyPaymentMethods(BaseTypeType $parameters)
     {
-        return $this->__soapCall('GetMyPaymentMethods', array($parameters));
+        return $this->__soapCall(
+            'GetMyPaymentMethods',
+            array(
+                (object)array('request' => $parameters)
+            )
+        );
     }
-
-
 }
 
