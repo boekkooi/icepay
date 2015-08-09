@@ -2,27 +2,23 @@
 
 namespace Icepay\Api;
 
-use SoapClient;
+use Icepay\Api\DataContract\CancelRefundResponseType;
+use Icepay\Api\DataContract\GetPaymentRefundsResponseType;
+use Icepay\Api\DataContract\RequestRefundResponseType;
 use Icepay\Api\IcePay\RequestRefund;
-use Icepay\Api\IcePay\RequestRefundResponse;
 use Icepay\Api\IcePay\CancelRefund;
-use Icepay\Api\IcePay\CancelRefundResponse;
 use Icepay\Api\IcePay\GetPaymentRefunds;
-use Icepay\Api\IcePay\GetPaymentRefundsResponse;
 
 class RefundClient extends SoapClient
 {
 
     private static $classMap = array(
         'RequestRefund' => RequestRefund::class,
-        'RequestRefundResponse' => RequestRefundResponse::class,
         'CancelRefund' => CancelRefund::class,
-        'CancelRefundResponse' => CancelRefundResponse::class,
         'GetPaymentRefunds' => GetPaymentRefunds::class,
-        'GetPaymentRefundsResponse' => GetPaymentRefundsResponse::class,
-        'http://schemas.datacontract.org/2004/07/APIService#RequestRefundResponse' => \Icepay\Api\DataContract\RequestRefundResponseType::class,
-        'http://schemas.datacontract.org/2004/07/APIService#CancelRefundResponse' => \Icepay\Api\DataContract\CancelRefundResponseType::class,
-        'http://schemas.datacontract.org/2004/07/APIService#GetPaymentRefundsResponse' => \Icepay\Api\DataContract\GetPaymentRefundsResponseType::class,
+        'RequestRefundResponse' => RequestRefundResponseType::class,
+        'CancelRefundResponse' => CancelRefundResponseType::class,
+        'GetPaymentRefundsResponse' => GetPaymentRefundsResponseType::class,
         'Refund' => \Icepay\Api\DataContract\SharedResponse\RefundType::class,
     );
 
@@ -42,31 +38,35 @@ class RefundClient extends SoapClient
 
     /**
      * @param RequestRefund $parameters
-     * @return RequestRefundResponse
+     * @return RequestRefundResponseType
      */
     public function RequestRefund(RequestRefund $parameters)
     {
-        return $this->__soapCall('RequestRefund', array($parameters));
+        $response = $this->__soapCall('RequestRefund', array($parameters));
+
+        return $this->checkResponse($response, 'RequestRefundResult');
     }
 
     /**
      * @param CancelRefund $parameters
-     * @return CancelRefundResponse
+     * @return CancelRefundResponseType
      */
     public function CancelRefund(CancelRefund $parameters)
     {
-        return $this->__soapCall('CancelRefund', array($parameters));
+        $response = $this->__soapCall('CancelRefund', array($parameters));
+
+        return $this->checkResponse($response, 'CancelRefundResult');
     }
 
     /**
      * @param GetPaymentRefunds $parameters
-     * @return GetPaymentRefundsResponse
+     * @return GetPaymentRefundsResponseType
      */
     public function GetPaymentRefunds(GetPaymentRefunds $parameters)
     {
-        return $this->__soapCall('GetPaymentRefunds', array($parameters));
+        $response = $this->__soapCall('GetPaymentRefunds', array($parameters));
+
+        return $this->checkResponse($response, 'GetPaymentRefundsResult');
     }
-
-
 }
 
