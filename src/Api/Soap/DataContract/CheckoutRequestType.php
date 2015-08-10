@@ -5,27 +5,24 @@ namespace Icepay\Api\Soap\DataContract;
 /**
  * Class representing CheckoutRequest
  *
- *
- *
  * @see http://schemas.datacontract.org/2004/07/APIService#CheckoutRequest
  */
 class CheckoutRequestType extends BaseTypeType
 {
+    /**
+     * @var int
+     */
+    protected $Amount;
 
     /**
-     * @var int|null
+     * @var string
      */
-    protected $Amount = null;
+    protected $Country;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $Country = null;
-
-    /**
-     * @var string|null
-     */
-    protected $Currency = null;
+    protected $Currency;
 
     /**
      * @var string|null
@@ -33,9 +30,9 @@ class CheckoutRequestType extends BaseTypeType
     protected $Description = null;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $EndUserIP = null;
+    protected $EndUserIP;
 
     /**
      * @var string|null
@@ -48,14 +45,14 @@ class CheckoutRequestType extends BaseTypeType
     protected $Issuer = null;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $Language = null;
+    protected $Language;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $OrderID = null;
+    protected $OrderID;
 
     /**
      * @var string|null
@@ -78,9 +75,32 @@ class CheckoutRequestType extends BaseTypeType
     protected $URLError = null;
 
     /**
+     * @param string $orderId
+     * @param int $amount
+     * @param string $currency
+     * @param string $country
+     * @param string $language
+     * @param string $endUserIP
+     * @param string|null $paymentMethod
+     * @param string|null $paymentIssuer
+     */
+    public function __construct($orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod = null, $paymentIssuer = null)
+    {
+        $this->OrderID = $orderId;
+        $this->Amount = $amount;
+        $this->Country = $country;
+        $this->Currency = $currency;
+        $this->EndUserIP = $endUserIP;
+        $this->Language = $language;
+
+        $this->setPaymentMethod($paymentMethod);
+        $this->setIssuer($paymentIssuer);
+    }
+
+    /**
      * Gets the Amount.
      *
-     * @return int|null
+     * @return int
      */
     public function getAmount()
     {
@@ -88,21 +108,9 @@ class CheckoutRequestType extends BaseTypeType
     }
 
     /**
-     * Sets the Amount.
-     *
-     * @param int|null $Amount
-     * @return $this
-     */
-    public function setAmount($Amount = null)
-    {
-        $this->Amount = $Amount;
-        return $this;
-    }
-
-    /**
      * Gets the Country.
      *
-     * @return string|null
+     * @return string
      */
     public function getCountry()
     {
@@ -110,37 +118,13 @@ class CheckoutRequestType extends BaseTypeType
     }
 
     /**
-     * Sets the Country.
-     *
-     * @param string|null $Country
-     * @return $this
-     */
-    public function setCountry($Country = null)
-    {
-        $this->Country = $Country;
-        return $this;
-    }
-
-    /**
      * Gets the Currency.
      *
-     * @return string|null
+     * @return string
      */
     public function getCurrency()
     {
         return $this->Currency;
-    }
-
-    /**
-     * Sets the Currency.
-     *
-     * @param string|null $Currency
-     * @return $this
-     */
-    public function setCurrency($Currency = null)
-    {
-        $this->Currency = $Currency;
-        return $this;
     }
 
     /**
@@ -168,24 +152,11 @@ class CheckoutRequestType extends BaseTypeType
     /**
      * Gets the EndUserIP.
      *
-     * @return string|null
+     * @return string
      */
     public function getEndUserIP()
     {
-        // return $_SERVER['REMOTE_ADDR']; TODO change!!!! see symfony code base
         return $this->EndUserIP;
-    }
-
-    /**
-     * Sets the EndUserIP.
-     *
-     * @param string|null $EndUserIP
-     * @return $this
-     */
-    public function setEndUserIP($EndUserIP = null)
-    {
-        $this->EndUserIP = $EndUserIP;
-        return $this;
     }
 
     /**
@@ -235,7 +206,7 @@ class CheckoutRequestType extends BaseTypeType
     /**
      * Gets the Language.
      *
-     * @return string|null
+     * @return string
      */
     public function getLanguage()
     {
@@ -243,37 +214,13 @@ class CheckoutRequestType extends BaseTypeType
     }
 
     /**
-     * Sets the Language.
-     *
-     * @param string|null $Language
-     * @return $this
-     */
-    public function setLanguage($Language = null)
-    {
-        $this->Language = $Language;
-        return $this;
-    }
-
-    /**
      * Gets the OrderID.
      *
-     * @return string|null
+     * @return string
      */
     public function getOrderID()
     {
         return $this->OrderID;
-    }
-
-    /**
-     * Sets the OrderID.
-     *
-     * @param string|null $OrderID
-     * @return $this
-     */
-    public function setOrderID($OrderID = null)
-    {
-        $this->OrderID = $OrderID;
-        return $this;
     }
 
     /**
@@ -384,7 +331,5 @@ class CheckoutRequestType extends BaseTypeType
             $this->getURLError()
         ];
     }
-
-
 }
 

@@ -34,6 +34,18 @@ class AutomaticCheckoutRequestType extends CheckoutRequestType
     protected $MerchnatID = null;
 
     /**
+     * @inheritdoc
+     * @param string $consumerID
+     */
+    public function __construct($consumerID, $orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod = null, $paymentIssuer = null)
+    {
+        parent::__construct($orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod, $paymentIssuer);
+
+        $this->setConsumerID($consumerID);
+    }
+
+
+    /**
      * Gets the CTimeStamp.
      *
      * @return string|null
