@@ -25,7 +25,7 @@ use Icepay\Api\Soap\DataContract\VaultCheckoutRequestType;
 
 class IcePayClient extends SoapClient
 {
-    private static $classMap = array(
+    protected static $classMap = array(
         'CheckoutRequest' => CheckoutRequestType::class,
         'CheckoutResponse' => CheckoutResponseType::class,
         'VaultCheckoutRequest' => VaultCheckoutRequestType::class,
@@ -53,18 +53,12 @@ class IcePayClient extends SoapClient
         'Country' => \Icepay\Api\Soap\DataContract\Responses\CountryType::class,
     );
 
-    public function __construct(array $options = 'array', $wsdl = 'https://connect.icepay.com/webservice/icepay.svc?wsdl')
+    /**
+     * @inheritdoc
+     */
+    public function __construct($secret, array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/icepay.svc?wsdl')
     {
-        if (empty($options['classmap'])) {
-            $options['classmap'] = self::$classMap;
-        } else {
-            foreach (self::$classMap as $soapType => $phpType) {
-                if (!isset($options['classmap'][$soapType])) {
-                    $options['classmap'][$soapType] = $phpType;
-                }
-            }
-        }
-        parent::__construct($wsdl, $options);
+        parent::__construct($secret, $wsdl, $options);
     }
 
     /**

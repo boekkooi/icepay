@@ -8,25 +8,18 @@ use Icepay\Api\Soap\IcePay\CapturePartial;
 
 class APCaptureClient extends SoapClient
 {
-
-    private static $classMap = array(
+    protected static $classMap = array(
         'CaptureFull' => CaptureFull::class,
         'CapturePartial' => CapturePartial::class,
         'RequestAPCaptureResponse' => RequestAPCaptureResponseType::class,
     );
 
-    public function __construct(array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/APCapture.svc?wsdl')
+    /**
+     * @inheritdoc
+     */
+    public function __construct($secret, array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/APCapture.svc?wsdl')
     {
-        if (empty($options['classmap'])) {
-            $options['classmap'] = self::$classMap;
-        } else {
-            foreach (self::$classMap as $soapType => $phpType) {
-                if (!isset($options['classmap'][$soapType])) {
-                    $options['classmap'][$soapType] = $phpType;
-                }
-            }
-        }
-        parent::__construct($wsdl, $options);
+        parent::__construct($secret, $wsdl, $options);
     }
 
     /**

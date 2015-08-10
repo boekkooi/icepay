@@ -11,8 +11,7 @@ use Icepay\Api\Soap\IcePay\GetPaymentRefunds;
 
 class RefundClient extends SoapClient
 {
-
-    private static $classMap = array(
+    protected static $classMap = array(
         'RequestRefund' => RequestRefund::class,
         'CancelRefund' => CancelRefund::class,
         'GetPaymentRefunds' => GetPaymentRefunds::class,
@@ -22,18 +21,12 @@ class RefundClient extends SoapClient
         'Refund' => \Icepay\Api\Soap\DataContract\SharedResponse\RefundType::class,
     );
 
-    public function __construct(array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/refund.svc?wsdl')
+    /**
+     * @inheritdoc
+     */
+    public function __construct($secret, array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/refund.svc?wsdl')
     {
-        if (empty($options['classmap'])) {
-            $options['classmap'] = self::$classMap;
-        } else {
-            foreach (self::$classMap as $soapType => $phpType) {
-                if (!isset($options['classmap'][$soapType])) {
-                    $options['classmap'][$soapType] = $phpType;
-                }
-            }
-        }
-        parent::__construct($wsdl, $options);
+        parent::__construct($secret, $wsdl, $options);
     }
 
     /**

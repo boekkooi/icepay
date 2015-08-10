@@ -17,6 +17,28 @@ class BadResponseException extends \UnexpectedValueException implements Exceptio
         return $this->responseObject;
     }
 
+    public static function forMissingResponseProperty($response, $string)
+    {
+        $ex =  new self(sprintf(
+            'Reponse should contain `%s` but none was found',
+            $string
+        ));
+        $ex->responseObject = $response;
+
+        return $ex;
+    }
+
+
+    public static function forInvalidChecksum($invalidObject)
+    {
+        $ex =  new self(
+            'Invalid checksum received'
+        );
+        $ex->responseObject = $invalidObject;
+
+        return $ex;
+    }
+
     public static function forFailedRequest(ResponseInterface $response)
     {
         $ex = new self(

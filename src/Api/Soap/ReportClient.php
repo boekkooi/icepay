@@ -17,8 +17,7 @@ use Icepay\Api\Soap\IcePay\GetPaymentMethods;
 
 class ReportClient extends SoapClient
 {
-
-    private static $classMap = array(
+    protected static $classMap = array(
         'CreateSession' => CreateSession::class,
         'KillSession' => KillSession::class,
         'MonthlyTurnoverTotals' => MonthlyTurnoverTotals::class,
@@ -37,18 +36,12 @@ class ReportClient extends SoapClient
         'PaymentMethod' => \Icepay\Api\Soap\DataContract\SharedResponse\PaymentMethodType::class,
     );
 
-    public function __construct(array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/report.svc?wsdl')
+    /**
+     * @inheritdoc
+     */
+    public function __construct($secret, array $options = array(), $wsdl = 'https://connect.icepay.com/webservice/report.svc?wsdl')
     {
-        if (empty($options['classmap'])) {
-            $options['classmap'] = self::$classMap;
-        } else {
-            foreach (self::$classMap as $soapType => $phpType) {
-                if (!isset($options['classmap'][$soapType])) {
-                    $options['classmap'][$soapType] = $phpType;
-                }
-            }
-        }
-        parent::__construct($wsdl, $options);
+        parent::__construct($secret, $wsdl, $options);
     }
 
     /**
