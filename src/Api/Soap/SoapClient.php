@@ -56,6 +56,10 @@ abstract class SoapClient extends \SoapClient
             throw BadResponseException::forInvalidChecksum($data);
         }
 
+        if (method_exists($data, '__wakeup')) {
+            $data->__wakeup();
+        }
+
         return $data;
     }
 }
