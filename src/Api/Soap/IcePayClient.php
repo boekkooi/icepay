@@ -8,6 +8,7 @@ use Icepay\Api\Soap\DataContract\CheckoutExtendedRequestType;
 use Icepay\Api\Soap\DataContract\CheckoutRequestType;
 use Icepay\Api\Soap\DataContract\CheckoutResponseType;
 use Icepay\Api\Soap\DataContract\CheckoutWithPINRequestType;
+use Icepay\Api\Soap\DataContract\GetMyPaymentMethodRequestType;
 use Icepay\Api\Soap\DataContract\GetMyPaymentMethodResponseType;
 use Icepay\Api\Soap\DataContract\GetPaymentRequestType;
 use Icepay\Api\Soap\DataContract\GetPaymentResponseType;
@@ -256,10 +257,10 @@ class IcePayClient extends SoapClient
     }
 
     /**
-     * @param BaseTypeType $parameters
+     * @param GetMyPaymentMethodRequestType $parameters
      * @return GetMyPaymentMethodResponseType
      */
-    public function GetMyPaymentMethods(BaseTypeType $parameters)
+    public function GetMyPaymentMethods(GetMyPaymentMethodRequestType $parameters)
     {
         $response = $this->__soapCall(
             'GetMyPaymentMethods',

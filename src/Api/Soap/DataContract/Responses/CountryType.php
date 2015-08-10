@@ -11,7 +11,6 @@ namespace Icepay\Api\Soap\DataContract\Responses;
  */
 class CountryType
 {
-
     /**
      * @var string|null
      */
@@ -43,18 +42,6 @@ class CountryType
     }
 
     /**
-     * Sets the CountryCode.
-     *
-     * @param string|null $CountryCode
-     * @return $this
-     */
-    public function setCountryCode($CountryCode = null)
-    {
-        $this->CountryCode = $CountryCode;
-        return $this;
-    }
-
-    /**
      * Gets the Currency.
      *
      * @return string|null
@@ -62,18 +49,6 @@ class CountryType
     public function getCurrency()
     {
         return $this->Currency;
-    }
-
-    /**
-     * Sets the Currency.
-     *
-     * @param string|null $Currency
-     * @return $this
-     */
-    public function setCurrency($Currency = null)
-    {
-        $this->Currency = $Currency;
-        return $this;
     }
 
     /**
@@ -87,18 +62,6 @@ class CountryType
     }
 
     /**
-     * Sets the MaximumAmount.
-     *
-     * @param int|null $MaximumAmount
-     * @return $this
-     */
-    public function setMaximumAmount($MaximumAmount = null)
-    {
-        $this->MaximumAmount = $MaximumAmount;
-        return $this;
-    }
-
-    /**
      * Gets the MinimumAmount.
      *
      * @return int|null
@@ -107,19 +70,5 @@ class CountryType
     {
         return $this->MinimumAmount;
     }
-
-    /**
-     * Sets the MinimumAmount.
-     *
-     * @param int|null $MinimumAmount
-     * @return $this
-     */
-    public function setMinimumAmount($MinimumAmount = null)
-    {
-        $this->MinimumAmount = $MinimumAmount;
-        return $this;
-    }
-
-
 }
 

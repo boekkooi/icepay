@@ -11,7 +11,6 @@ namespace Icepay\Api\Soap\DataContract\Responses;
  */
 class PaymentMethodType
 {
-
     /**
      * @var string|null
      */
@@ -38,18 +37,6 @@ class PaymentMethodType
     }
 
     /**
-     * Sets the Description.
-     *
-     * @param string|null $Description
-     * @return $this
-     */
-    public function setDescription($Description = null)
-    {
-        $this->Description = $Description;
-        return $this;
-    }
-
-    /**
      * Gets the Issuers.
      *
      * @return \Icepay\Api\Soap\DataContract\Responses\IssuerType[]|null
@@ -57,72 +44,6 @@ class PaymentMethodType
     public function getIssuers()
     {
         return $this->Issuers;
-    }
-
-    /**
-     * Sets the Issuers.
-     *
-     * @param \Icepay\Api\Soap\DataContract\Responses\IssuerType[]|null $Issuers
-     * @return $this
-     */
-    public function setIssuers(array $Issuers = null)
-    {
-        foreach ($Issuers as $item) {
-            $this->addIssuer($item);
-        }
-        return $this;
-    }
-
-    /**
-     * Adds an Issuer.
-     *
-     * @param \Icepay\Api\Soap\DataContract\Responses\IssuerType $Issuer The Issuer to add.
-     * @return $this
-     */
-    public function addIssuer(\Icepay\Api\Soap\DataContract\Responses\IssuerType $Issuer)
-    {
-        $this->Issuers[] = $Issuer;
-        return $this;
-    }
-
-    /**
-     * Sets an Issuer at the specified key/index.
-     *
-     * @param string|integer $key The key/index of the Issuer to set.
-     * @param \Icepay\Api\Soap\DataContract\Responses\IssuerType $Issuer The Issuer to set.
-     * @return $this
-     */
-    public function setIssuer($key, \Icepay\Api\Soap\DataContract\Responses\IssuerType $Issuer)
-    {
-        $this->Issuers[$key] = $Issuer;
-        return $this;
-    }
-
-    /**
-     * Removes the Issuer at the specified key/index.
-     *
-     * @param string|integer $key The kex/index of the Issuer to remove
-     * @return \Icepay\Api\Soap\DataContract\Responses\IssuerType|null The removed Issuer or NULL.
-     */
-    public function removeIssuer($key)
-    {
-        if (!isset($this->Issuers[$key]) && !array_key_exists($key, $this->Issuers)) {
-            return null;
-        }
-        $removed = $this->Issuers[$key];
-        unset($this->Issuers[$key]);
-        return $removed;
-    }
-
-    /**
-     * Removes the Issuer at the specified key/index.
-     *
-     * @param \Icepay\Api\Soap\DataContract\Responses\IssuerType $Issuer The Issuer to search for.
-     * @return string|integer|bool The key/index of the Issuer or FALSE if the Issuer was not found.
-     */
-    public function indexOfIssuer($Issuer)
-    {
-        return array_search($Issuer, $this->Issuers, true);
     }
 
     /**
@@ -136,17 +57,16 @@ class PaymentMethodType
     }
 
     /**
-     * Sets the PaymentMethodCode.
-     *
-     * @param string|null $PaymentMethodCode
-     * @return $this
+     * @inheritDoc
      */
-    public function setPaymentMethodCode($PaymentMethodCode = null)
+    public function __wakeup()
     {
-        $this->PaymentMethodCode = $PaymentMethodCode;
-        return $this;
+        if ($this->Issuers instanceof \stdClass) {
+            $this->Issuers = $this->Issuers->Issuer;
+            foreach ($this->Issuers as $issuer) {
+                $issuer->__wakeup();
+            }
+        }
     }
-
-
 }
 
