@@ -11,7 +11,6 @@ namespace Icepay\Api\Soap\DataContract;
  */
 class AutomaticCheckoutResponseType extends BaseTypeType
 {
-
     /**
      * @var string|null
      */
@@ -38,18 +37,6 @@ class AutomaticCheckoutResponseType extends BaseTypeType
     }
 
     /**
-     * Sets the ErrorDescription.
-     *
-     * @param string|null $ErrorDescription
-     * @return $this
-     */
-    public function setErrorDescription($ErrorDescription = null)
-    {
-        $this->ErrorDescription = $ErrorDescription;
-        return $this;
-    }
-
-    /**
      * Gets the PaymentID.
      *
      * @return int|null
@@ -57,18 +44,6 @@ class AutomaticCheckoutResponseType extends BaseTypeType
     public function getPaymentID()
     {
         return $this->PaymentID;
-    }
-
-    /**
-     * Sets the PaymentID.
-     *
-     * @param int|null $PaymentID
-     * @return $this
-     */
-    public function setPaymentID($PaymentID = null)
-    {
-        $this->PaymentID = $PaymentID;
-        return $this;
     }
 
     /**
@@ -82,27 +57,22 @@ class AutomaticCheckoutResponseType extends BaseTypeType
     }
 
     /**
-     * Sets the Success.
-     *
-     * @param bool|null $Success
-     * @return $this
-     */
-    public function setSuccess($Success = null)
-    {
-        $this->Success = $Success;
-        return $this;
-    }
-
-    /**
      * @inheritDoc
      */
     protected function getChecksumData()
     {
         return [
-            $this->getErrorDescription(),
             $this->getPaymentID(),
-            $this->getSuccess()
+            $this->getSuccess(),
+            $this->getErrorDescription(),
         ];
     }
-}
 
+    /**
+     * @inheritDoc
+     */
+    protected function resolveChecksum(array $data, $isAutoCheckout = false)
+    {
+        return parent::resolveChecksum($data, true);
+    }
+}

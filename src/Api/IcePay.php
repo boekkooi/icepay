@@ -50,6 +50,32 @@ class IcePay
     }
 
     /**
+     * Initialize a recurring/stored payment.
+     *
+     * @param Soap\DataContract\VaultCheckoutRequestType $request
+     * @return Soap\DataContract\CheckoutResponseType
+     */
+    public function initializeRecurringPayment(Soap\DataContract\VaultCheckoutRequestType $request)
+    {
+        $this->prepareRequest($request);
+
+        return $this->getSoapClient()->VaultCheckout($request);
+    }
+
+    /**
+     * Initialize a recurring/stored payment.
+     *
+     * @param Soap\DataContract\AutomaticCheckoutRequestType $request
+     * @return Soap\DataContract\AutomaticCheckoutResponseType
+     */
+    public function requestRecurringPayment(Soap\DataContract\AutomaticCheckoutRequestType $request)
+    {
+        $this->prepareRequest($request);
+
+        return $this->getSoapClient()->AutomaticCheckout($request);
+    }
+
+    /**
      * Retrieve payment information
      *
      * @param int $paymentId
