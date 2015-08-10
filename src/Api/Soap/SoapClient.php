@@ -2,6 +2,7 @@
 namespace Icepay\Api\Soap;
 
 use Icepay\Api\Exception\BadResponseException;
+use Icepay\Api\Exception\SoapFaultException;
 
 abstract class SoapClient extends \SoapClient
 {
@@ -27,6 +28,9 @@ abstract class SoapClient extends \SoapClient
                 }
             }
         }
+        if (!isset($options['exceptions'])) {
+            $options['exceptions'] = false;
+        }
 
         parent::__construct($wsdl, $options);
 
@@ -44,7 +48,12 @@ abstract class SoapClient extends \SoapClient
     protected function checkResponse($response, $property)
     {
         if ($response instanceof \SoapFault) {
-            return $response;
+            $exception = SoapFaultException::forSoapFault($response);
+            if ($exception === null) {
+                return null;
+            }
+
+            throw $exception;
         }
 
         if (!property_exists($response, $property)) {
