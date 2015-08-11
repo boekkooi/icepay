@@ -2,10 +2,10 @@
 
 namespace Icepay\Api\Soap\DataContract;
 
+use Assert;
+
 /**
  * Class representing AutomaticCheckoutRequest
- *
- *
  *
  * @see http://schemas.datacontract.org/2004/07/APIService#AutomaticCheckoutRequest
  * TODO what are cTimeStamp, checksuum and merchnatID for?
@@ -41,7 +41,9 @@ class AutomaticCheckoutRequestType extends CheckoutRequestType
     {
         parent::__construct($orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod, $paymentIssuer);
 
-        $this->setConsumerID($consumerID);
+        Assert\that($consumerID, null, 'consumerID')->notEmpty();
+
+        $this->ConsumerID = $consumerID;
     }
 
 
@@ -97,18 +99,6 @@ class AutomaticCheckoutRequestType extends CheckoutRequestType
     public function getConsumerID()
     {
         return $this->ConsumerID;
-    }
-
-    /**
-     * Sets the ConsumerID.
-     *
-     * @param string|null $ConsumerID
-     * @return $this
-     */
-    public function setConsumerID($ConsumerID = null)
-    {
-        $this->ConsumerID = $ConsumerID;
-        return $this;
     }
 
     /**

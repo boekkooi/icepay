@@ -2,6 +2,8 @@
 
 namespace Icepay\Api\Soap\DataContract;
 
+use Assert;
+
 /**
  * Class representing CheckoutRequest
  *
@@ -76,16 +78,28 @@ class CheckoutRequestType extends BaseTypeType
 
     /**
      * @param string $orderId
-     * @param int $amount
-     * @param string $currency
-     * @param string $country
-     * @param string $language
+     * @param int $amount The amount in cents
+     * @param string $currency A ISO-3166 code
+     * @param string $country A ISO-4217 code
+     * @param string $language A ISO-639-1 code
      * @param string $endUserIP
      * @param string|null $paymentMethod
      * @param string|null $paymentIssuer
      */
     public function __construct($orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod = null, $paymentIssuer = null)
     {
+        $orderId = (string)$orderId;
+
+        Assert\lazy()
+            ->that($orderId, 'orderId')->notEmpty()->maxLength(10)
+            ->that($amount, 'amount')->integer()->range(30, 1000000)
+            ->that($currency, 'currency')->string()->length(3)//->iso3166()
+            ->that($country, 'country')->string()->length(2) //iso4217()
+            ->that($language, 'language')->string()->length(2) //iso639()
+//            ->that($endUserIP, 'endUserIP')->ip()
+            ->verifyNow()
+        ;
+
         $this->OrderID = $orderId;
         $this->Amount = $amount;
         $this->Country = $country;
@@ -145,6 +159,8 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setDescription($Description = null)
     {
+        Assert\thatNullOr($Description)->string()->maxLength(100);
+
         $this->Description = $Description;
         return $this;
     }
@@ -199,6 +215,8 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setIssuer($Issuer = null)
     {
+        Assert\thatNullOr($Issuer)->string()->maxLength(20);
+
         $this->Issuer = $Issuer;
         return $this;
     }
@@ -241,6 +259,8 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setPaymentMethod($PaymentMethod = null)
     {
+        Assert\thatNullOr($PaymentMethod)->string()->maxLength(20);
+
         $this->PaymentMethod = $PaymentMethod;
         return $this;
     }
@@ -263,6 +283,8 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setReference($Reference = null)
     {
+        Assert\thatNullOr($Reference)->string()->maxLength(50);
+
         $this->Reference = $Reference;
         return $this;
     }
@@ -285,6 +307,8 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setURLCompleted($URLCompleted = null)
     {
+        Assert\thatNullOr($URLCompleted)->url()->maxLength(500);
+
         $this->URLCompleted = $URLCompleted;
         return $this;
     }
@@ -307,6 +331,8 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setURLError($URLError = null)
     {
+        Assert\thatNullOr($URLError)->url()->maxLength(500);
+
         $this->URLError = $URLError;
         return $this;
     }
