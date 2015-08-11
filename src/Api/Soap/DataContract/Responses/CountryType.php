@@ -17,7 +17,7 @@ class CountryType
     protected $CountryCode = null;
 
     /**
-     * @var string|null
+     * @var string[]
      */
     protected $Currency = null;
 
@@ -42,11 +42,11 @@ class CountryType
     }
 
     /**
-     * Gets the Currency.
+     * Gets the Currencies.
      *
-     * @return string|null
+     * @return string[]
      */
-    public function getCurrency()
+    public function getCurrencies()
     {
         return $this->Currency;
     }
@@ -69,6 +69,16 @@ class CountryType
     public function getMinimumAmount()
     {
         return $this->MinimumAmount;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __wakeup()
+    {
+        if (is_string($this->Currency)) {
+            $this->Currency = array_map('trim', explode(',', $this->Currency));
+        }
     }
 }
 

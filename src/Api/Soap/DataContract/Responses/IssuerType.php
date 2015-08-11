@@ -61,6 +61,13 @@ class IssuerType
     {
         if ($this->Countries instanceof \stdClass) {
             $this->Countries = $this->Countries->Country;
+            if (!is_array($this->Countries)) {
+                $this->Countries = [ $this->Countries ];
+            }
+
+            foreach ($this->Countries as $country) {
+                $country->__wakeup();
+            }
         }
     }
 }

@@ -63,6 +63,10 @@ class PaymentMethodType
     {
         if ($this->Issuers instanceof \stdClass) {
             $this->Issuers = $this->Issuers->Issuer;
+            if (!is_array($this->Issuers)) {
+                $this->Issuers = [ $this->Issuers ];
+            }
+
             foreach ($this->Issuers as $issuer) {
                 $issuer->__wakeup();
             }

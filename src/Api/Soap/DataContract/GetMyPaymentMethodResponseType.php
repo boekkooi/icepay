@@ -52,6 +52,9 @@ class GetMyPaymentMethodResponseType implements \IteratorAggregate
     {
         if ($this->PaymentMethods instanceof \stdClass) {
             $this->PaymentMethods = $this->PaymentMethods->PaymentMethod;
+            if (!is_array($this->PaymentMethods)) {
+                $this->PaymentMethods = [ $this->PaymentMethods ];
+            }
 
             foreach ($this->PaymentMethods as $method) {
                 $method->__wakeup();
