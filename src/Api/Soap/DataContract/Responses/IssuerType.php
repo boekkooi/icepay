@@ -25,6 +25,21 @@ class IssuerType
     protected $IssuerKeyword = null;
 
     /**
+     * IssuerType constructor.
+     *
+     * @param CountryType[] $countries
+     * @param null|string $description
+     * @param null|string $issuerKeyword
+     */
+    public function __construct($description, $issuerKeyword, array $countries)
+    {
+        $this->Description = $description;
+        $this->IssuerKeyword = $issuerKeyword;
+        $this->Countries = $countries;
+    }
+
+
+    /**
      * Gets the Countries.
      *
      * @return \Icepay\Api\Soap\DataContract\Responses\CountryType[]|null
