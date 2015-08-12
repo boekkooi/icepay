@@ -1,6 +1,7 @@
 <?php
 namespace Icepay\Api\Soap;
 
+use Icepay\Api\Assert;
 use Icepay\Api\Exception\BadResponseException;
 use Icepay\Api\Exception\SoapFaultException;
 
@@ -19,6 +20,8 @@ abstract class SoapClient extends \SoapClient
      */
     public function __construct($secretCode, $wsdl, array $options = array())
     {
+        Assert::that($secretCode, null, 'secretCode')->notEmpty()->string();
+
         if (empty($options['classmap'])) {
             $options['classmap'] = static::$classMap;
         } else {
@@ -36,7 +39,6 @@ abstract class SoapClient extends \SoapClient
 
         $this->secret = $secretCode;
     }
-
 
     /**
      * Check that a response has a given property and return that.

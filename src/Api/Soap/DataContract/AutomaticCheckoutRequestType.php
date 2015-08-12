@@ -2,7 +2,7 @@
 
 namespace Icepay\Api\Soap\DataContract;
 
-use Assert;
+use Icepay\Api\Assert;
 
 /**
  * Class representing AutomaticCheckoutRequest
@@ -35,15 +35,20 @@ class AutomaticCheckoutRequestType extends CheckoutRequestType
 
     /**
      * @inheritdoc
-     * @param string $consumerID
+     * @param string $consumerId
      */
-    public function __construct($consumerID, $orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod = null, $paymentIssuer = null)
+    public function __construct($consumerId, $orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod = null, $paymentIssuer = null)
     {
         parent::__construct($orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod, $paymentIssuer);
 
-        Assert\that($consumerID, null, 'consumerID')->notEmpty();
+        Assert::lazy()
+            ->that($consumerId, 'consumerId')->notEmpty()
+            ->that($paymentMethod, 'paymentMethod')->notEmpty()
+            ->that($paymentIssuer, 'paymentIssuer')->notEmpty()
+            ->verifyNow()
+        ;
 
-        $this->ConsumerID = $consumerID;
+        $this->ConsumerID = $consumerId;
     }
 
 

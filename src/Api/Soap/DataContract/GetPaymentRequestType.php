@@ -2,13 +2,11 @@
 
 namespace Icepay\Api\Soap\DataContract;
 
+use Icepay\Api\Assert;
+
 /**
  * Class representing GetPaymentRequest
-<<<<<<< HEAD
- *
-=======
- *
->>>>>>> e65c09b... GetPaymentRequestType set requested value for constructor
+ * 
  * @see http://schemas.datacontract.org/2004/07/APIService#GetPaymentRequest
  */
 final class GetPaymentRequestType extends BaseTypeType
@@ -21,11 +19,13 @@ final class GetPaymentRequestType extends BaseTypeType
     /**
      * GetPaymentRequestType constructor.
      *
-     * @param int $PaymentID
+     * @param int $paymentID
      */
-    public function __construct($PaymentID)
+    public function __construct($paymentID)
     {
-        $this->PaymentID = $PaymentID;
+        Assert::that($paymentID, null, 'paymentID')->integer();
+
+        $this->PaymentID = $paymentID;
     }
 
     /**

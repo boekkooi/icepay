@@ -2,7 +2,7 @@
 
 namespace Icepay\Api\Soap\DataContract;
 
-use Assert;
+use Icepay\Api\Assert;
 
 /**
  * Class representing CheckoutRequest
@@ -90,13 +90,13 @@ class CheckoutRequestType extends BaseTypeType
     {
         $orderId = (string)$orderId;
 
-        Assert\lazy()
+        Assert::lazy()
             ->that($orderId, 'orderId')->notEmpty()->maxLength(10)
             ->that($amount, 'amount')->integer()->range(30, 1000000)
             ->that($currency, 'currency')->string()->length(3)//->iso3166()
             ->that($country, 'country')->string()->length(2) //iso4217()
             ->that($language, 'language')->string()->length(2) //iso639()
-//            ->that($endUserIP, 'endUserIP')->ip()
+            ->that($endUserIP, 'endUserIP')->ip()
             ->verifyNow()
         ;
 
@@ -159,7 +159,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setDescription($Description = null)
     {
-        Assert\thatNullOr($Description)->string()->maxLength(100);
+        Assert::that($Description)->nullOr()->string()->maxLength(100);
 
         $this->Description = $Description;
         return $this;
@@ -215,7 +215,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setIssuer($Issuer = null)
     {
-        Assert\thatNullOr($Issuer)->string()->maxLength(20);
+        Assert::that($Issuer)->nullOr()->string()->maxLength(20);
 
         $this->Issuer = $Issuer;
         return $this;
@@ -259,7 +259,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setPaymentMethod($PaymentMethod = null)
     {
-        Assert\thatNullOr($PaymentMethod)->string()->maxLength(20);
+        Assert::that($PaymentMethod)->nullOr()->string()->maxLength(20);
 
         $this->PaymentMethod = $PaymentMethod;
         return $this;
@@ -283,7 +283,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setReference($Reference = null)
     {
-        Assert\thatNullOr($Reference)->string()->maxLength(50);
+        Assert::that($Reference)->nullOr()->string()->maxLength(50);
 
         $this->Reference = $Reference;
         return $this;
@@ -307,7 +307,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setURLCompleted($URLCompleted = null)
     {
-        Assert\thatNullOr($URLCompleted)->url()->maxLength(500);
+        Assert::that($URLCompleted)->nullOr()->url()->maxLength(500);
 
         $this->URLCompleted = $URLCompleted;
         return $this;
@@ -331,7 +331,7 @@ class CheckoutRequestType extends BaseTypeType
      */
     public function setURLError($URLError = null)
     {
-        Assert\thatNullOr($URLError)->url()->maxLength(500);
+        Assert::that($URLError)->nullOr()->url()->maxLength(500);
 
         $this->URLError = $URLError;
         return $this;

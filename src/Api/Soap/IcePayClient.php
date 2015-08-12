@@ -1,6 +1,7 @@
 <?php
 namespace Icepay\Api\Soap;
 
+use Icepay\Api\Assert;
 use Icepay\Api\Soap\DataContract\AutomaticCheckoutRequestType;
 use Icepay\Api\Soap\DataContract\AutomaticCheckoutResponseType;
 use Icepay\Api\Soap\DataContract\BaseTypeType;
@@ -68,12 +69,13 @@ class IcePayClient extends SoapClient
      */
     public function Checkout(CheckoutRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'Checkout',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        Assert::lazy()
+            ->that($parameters->getPaymentMethod(), 'PaymentMethod')->notEmpty()
+            ->that($parameters->getIssuer(), 'Issuer')->notEmpty()
+            ->verifyNow()
+        ;
+
+        $response = $this->soapCall('Checkout', $parameters);
 
         return $this->checkResponse($response, 'CheckoutResult');
     }
@@ -84,12 +86,7 @@ class IcePayClient extends SoapClient
      */
     public function VaultCheckout(VaultCheckoutRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'VaultCheckout',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('VaultCheckout', $parameters);
 
         return $this->checkResponse($response, 'VaultCheckoutResult');
     }
@@ -100,12 +97,7 @@ class IcePayClient extends SoapClient
      */
     public function AutomaticCheckout(AutomaticCheckoutRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'AutomaticCheckout',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('AutomaticCheckout', $parameters);
 
         return $this->checkResponse($response, 'AutomaticCheckoutResult');
     }
@@ -116,12 +108,7 @@ class IcePayClient extends SoapClient
      */
     public function CheckoutExtended(CheckoutExtendedRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'CheckoutExtended',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('CheckoutExtended', $parameters);
 
         return $this->checkResponse($response, 'CheckoutExtendedResult');
     }
@@ -132,12 +119,7 @@ class IcePayClient extends SoapClient
      */
     public function SMSCheckout(CheckoutRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'SMSCheckout',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('SMSCheckout', $parameters);
 
         return $this->checkResponse($response, 'SMSCheckoutResult');
     }
@@ -148,12 +130,7 @@ class IcePayClient extends SoapClient
      */
     public function PhoneCheckout(CheckoutRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'PhoneCheckout',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('PhoneCheckout', $parameters);
 
         return $this->checkResponse($response, 'PhoneCheckoutResult');
     }
@@ -164,12 +141,7 @@ class IcePayClient extends SoapClient
      */
     public function PhoneDirectCheckout(CheckoutWithPINRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'PhoneDirectCheckout',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('PhoneDirectCheckout', $parameters);
 
         return $this->checkResponse($response, 'PhoneDirectCheckoutResult');
     }
@@ -180,12 +152,7 @@ class IcePayClient extends SoapClient
      */
     public function ValidatePhoneCode(ValidatePhoneCodeRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'ValidatePhoneCode',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('ValidatePhoneCode', $parameters);
 
         return $this->checkResponse($response, 'ValidatePhoneCodeResult');
     }
@@ -198,12 +165,7 @@ class IcePayClient extends SoapClient
      */
     public function GetPhoneStatus(GetPhoneStatusRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'GetPhoneStatus',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('GetPhoneStatus', $parameters);
 
         return $this->checkResponse($response, 'GetPhoneStatusResult');
     }
@@ -214,12 +176,7 @@ class IcePayClient extends SoapClient
      */
     public function ValidateSmsCode(ValidateSmsCodeRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'ValidateSmsCode',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('ValidateSmsCode', $parameters);
 
         return $this->checkResponse($response, 'ValidateSmsCodeResult');
     }
@@ -230,12 +187,7 @@ class IcePayClient extends SoapClient
      */
     public function GetPayment(GetPaymentRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'GetPayment',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('GetPayment', $parameters);
 
         return $this->checkResponse($response, 'GetPaymentResult');
     }
@@ -246,12 +198,7 @@ class IcePayClient extends SoapClient
      */
     public function GetPremiumRateNumbers(BaseTypeType $parameters)
     {
-        $response = $this->__soapCall(
-            'GetPremiumRateNumbers',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('GetPremiumRateNumbers', $parameters);
 
         return $this->checkResponse($response, 'GetPremiumRateNumbersResult');
     }
@@ -262,14 +209,23 @@ class IcePayClient extends SoapClient
      */
     public function GetMyPaymentMethods(GetMyPaymentMethodRequestType $parameters)
     {
-        $response = $this->__soapCall(
-            'GetMyPaymentMethods',
-            array(
-                (object)array('request' => $parameters)
-            )
-        );
+        $response = $this->soapCall('GetMyPaymentMethods', $parameters);
 
         return $this->checkResponse($response, 'GetMyPaymentMethodsResult');
+    }
+
+    private function soapCall($method, BaseTypeType $request)
+    {
+        Assert::lazy()
+            ->that($request->getMerchantID(), 'MerchantID')->notEmpty()
+            ->that($request->getTimestamp(), 'Timestamp')->notEmpty()
+            ->that($request->getChecksum(), 'Checksum')->notEmpty()
+            ->verifyNow()
+        ;
+
+        return $this->__soapCall($method, [
+            (object)[ 'request' => $request ]
+        ]);
     }
 }
 

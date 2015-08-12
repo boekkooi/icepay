@@ -1,11 +1,18 @@
 <?php
 namespace Icepay\Api;
 
+use Icepay\Api\Assert;
+
 class IcePay
 {
+    /**
+     * @var string
+     */
     private $merchantId;
+    /**
+     * @var string
+     */
     private $secretCode;
-
     /**
      * @var Http\IcePayClient|null
      */
@@ -15,8 +22,17 @@ class IcePay
      */
     private $soapClient;
 
+    /**
+     * @param string $merchantId
+     * @param string $secretCode
+     */
     public function __construct($merchantId, $secretCode)
     {
+        Assert::lazy()
+            ->that($merchantId, 'merchantId')->notEmpty()->string()
+            ->that($secretCode, 'secretCode')->notEmpty()->string()
+            ->verifyNow();
+
         $this->merchantId = $merchantId;
         $this->secretCode = $secretCode;
     }

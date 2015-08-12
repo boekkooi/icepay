@@ -2,6 +2,8 @@
 
 namespace Icepay\Api\Soap\DataContract;
 
+use Icepay\Api\Assert;
+
 /**
  * Class representing VaultCheckoutRequest
  *
@@ -18,9 +20,16 @@ class VaultCheckoutRequestType extends CheckoutRequestType
      * @inheritdoc
      * @param string $consumerId
      */
-    public function __construct($consumerId, $orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod = null, $paymentIssuer = null)
+    public function __construct($consumerId, $orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod, $paymentIssuer)
     {
         parent::__construct($orderId, $amount, $currency, $country, $language, $endUserIP, $paymentMethod, $paymentIssuer);
+
+        Assert::lazy()
+            ->that($consumerId, 'consumerId')->notEmpty()
+            ->that($paymentMethod, 'paymentMethod')->notEmpty()
+            ->that($paymentIssuer, 'paymentIssuer')->notEmpty()
+            ->verifyNow()
+        ;
 
         $this->ConsumerID = $consumerId;
     }

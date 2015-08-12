@@ -1,6 +1,7 @@
 <?php
 namespace Icepay\Api\Http;
 
+use Icepay\Api\Assert;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Uri;
 use Icepay\Api\Exception\BadResponseException;
@@ -21,11 +22,13 @@ class IcePayClient
     /**
      * @var string
      */
-    private $secret;
+    private $secretCode;
 
-    public function __construct($secret, Client $httpClient = null)
+    public function __construct($secretCode, Client $httpClient = null)
     {
-        $this->secret = $secret;
+        Assert::that($secretCode, null, 'secretCode')->notEmpty()->string();
+
+        $this->secretCode = $secretCode;
     }
 
     /**
@@ -75,7 +78,7 @@ class IcePayClient
 
             'chk' => sha1(implode('|', [
                 $request->getMerchantID(),
-                $this->secret,
+                $this->secretCode,
                 $request->getAmount(),
                 $request->getOrderID(),
                 $request->getReference(),
@@ -87,7 +90,7 @@ class IcePayClient
         ];
 
         // There is no payment method specified to just generate the basic uri.
-        if ($request->getPaymentMethod() === null || $request->getIssuer() === null) {
+        if (empty($request->getPaymentMethod()) || empty($request->getIssuer())) {
             $uri = (new Uri($this->getHttpClient()->getConfig('base_uri')))
                 ->withPath('/basic/')
                 ->withQuery(http_build_query($postData, null, '&', PHP_QUERY_RFC3986));
