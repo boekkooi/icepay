@@ -15,12 +15,12 @@
     },
     "autoload":{
         "psr-4":{
-            "Icepay\\": "src/"
+            "Icepay\\Api\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Icepay\\":"tests/"
+            "Tests\\Icepay\\Api\\":"tests/"
         }
     }
 }
