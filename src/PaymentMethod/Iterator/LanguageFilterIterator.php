@@ -1,7 +1,6 @@
 <?php
 namespace Icepay\Api\PaymentMethod\Iterator;
 
-use Icepay\Api\PaymentMethod\PaymentMethod;
 use Icepay\Api\Soap\DataContract\Responses\PaymentMethodType;
 use Iterator;
 
