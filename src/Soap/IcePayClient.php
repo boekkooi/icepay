@@ -67,7 +67,7 @@ class IcePayClient extends SoapClient
      * @param CheckoutRequestType $parameters
      * @return CheckoutResponseType
      */
-    public function Checkout(CheckoutRequestType $parameters)
+    public function checkout(CheckoutRequestType $parameters)
     {
         Assert::lazy()
             ->that($parameters->getPaymentMethod(), 'PaymentMethod')->notEmpty()
@@ -84,7 +84,7 @@ class IcePayClient extends SoapClient
      * @param VaultCheckoutRequestType $parameters
      * @return CheckoutResponseType
      */
-    public function VaultCheckout(VaultCheckoutRequestType $parameters)
+    public function vaultCheckout(VaultCheckoutRequestType $parameters)
     {
         $response = $this->soapCall('VaultCheckout', $parameters);
 
@@ -95,7 +95,7 @@ class IcePayClient extends SoapClient
      * @param AutomaticCheckoutRequestType $parameters
      * @return AutomaticCheckoutResponseType
      */
-    public function AutomaticCheckout(AutomaticCheckoutRequestType $parameters)
+    public function automaticCheckout(AutomaticCheckoutRequestType $parameters)
     {
         $response = $this->soapCall('AutomaticCheckout', $parameters);
 
@@ -106,7 +106,7 @@ class IcePayClient extends SoapClient
      * @param CheckoutExtendedRequestType $parameters
      * @return CheckoutResponseType
      */
-    public function CheckoutExtended(CheckoutExtendedRequestType $parameters)
+    public function checkoutExtended(CheckoutExtendedRequestType $parameters)
     {
         $response = $this->soapCall('CheckoutExtended', $parameters);
 
@@ -117,7 +117,7 @@ class IcePayClient extends SoapClient
      * @param CheckoutRequestType $parameters
      * @return SMSCheckoutResponseType
      */
-    public function SMSCheckout(CheckoutRequestType $parameters)
+    public function smsCheckout(CheckoutRequestType $parameters)
     {
         $response = $this->soapCall('SMSCheckout', $parameters);
 
@@ -128,7 +128,7 @@ class IcePayClient extends SoapClient
      * @param CheckoutRequestType $parameters
      * @return PhoneCheckoutResponseType
      */
-    public function PhoneCheckout(CheckoutRequestType $parameters)
+    public function phoneCheckout(CheckoutRequestType $parameters)
     {
         $response = $this->soapCall('PhoneCheckout', $parameters);
 
@@ -139,7 +139,7 @@ class IcePayClient extends SoapClient
      * @param CheckoutWithPINRequestType $parameters
      * @return PhoneDirectCheckoutResponseType
      */
-    public function PhoneDirectCheckout(CheckoutWithPINRequestType $parameters)
+    public function phoneDirectCheckout(CheckoutWithPINRequestType $parameters)
     {
         $response = $this->soapCall('PhoneDirectCheckout', $parameters);
 
@@ -150,7 +150,7 @@ class IcePayClient extends SoapClient
      * @param ValidatePhoneCodeRequestType $parameters
      * @return ValidatePhoneCodeResponseType
      */
-    public function ValidatePhoneCode(ValidatePhoneCodeRequestType $parameters)
+    public function validatePhoneCode(ValidatePhoneCodeRequestType $parameters)
     {
         $response = $this->soapCall('ValidatePhoneCode', $parameters);
 
@@ -163,7 +163,7 @@ class IcePayClient extends SoapClient
      * @param GetPhoneStatusRequestType $parameters
      * @return GetPhoneStatusResponseType
      */
-    public function GetPhoneStatus(GetPhoneStatusRequestType $parameters)
+    public function getPhoneStatus(GetPhoneStatusRequestType $parameters)
     {
         $response = $this->soapCall('GetPhoneStatus', $parameters);
 
@@ -174,7 +174,7 @@ class IcePayClient extends SoapClient
      * @param ValidateSmsCodeRequestType $parameters
      * @return ValidateSmsCodeResponseType
      */
-    public function ValidateSmsCode(ValidateSmsCodeRequestType $parameters)
+    public function validateSmsCode(ValidateSmsCodeRequestType $parameters)
     {
         $response = $this->soapCall('ValidateSmsCode', $parameters);
 
@@ -185,7 +185,7 @@ class IcePayClient extends SoapClient
      * @param GetPaymentRequestType $parameters
      * @return GetPaymentResponseType
      */
-    public function GetPayment(GetPaymentRequestType $parameters)
+    public function getPayment(GetPaymentRequestType $parameters)
     {
         $response = $this->soapCall('GetPayment', $parameters);
 
@@ -196,7 +196,7 @@ class IcePayClient extends SoapClient
      * @param BaseTypeType $parameters
      * @return GetPremiumRateNumbersResponseType
      */
-    public function GetPremiumRateNumbers(BaseTypeType $parameters)
+    public function getPremiumRateNumbers(BaseTypeType $parameters)
     {
         $response = $this->soapCall('GetPremiumRateNumbers', $parameters);
 
@@ -207,7 +207,7 @@ class IcePayClient extends SoapClient
      * @param GetMyPaymentMethodRequestType $parameters
      * @return GetMyPaymentMethodResponseType
      */
-    public function GetMyPaymentMethods(GetMyPaymentMethodRequestType $parameters)
+    public function getMyPaymentMethods(GetMyPaymentMethodRequestType $parameters)
     {
         $response = $this->soapCall('GetMyPaymentMethods', $parameters);
 

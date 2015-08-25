@@ -59,7 +59,7 @@ class IcePayClient
      * @return string A uri
      * @throws BadResponseException
      */
-    public function Checkout(CheckoutRequestType $request)
+    public function checkout(CheckoutRequestType $request)
     {
         // Prepare data
         $postData = [

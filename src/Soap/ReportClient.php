@@ -48,7 +48,7 @@ class ReportClient extends SoapClient
      * @param CreateSession $parameters
      * @return CreateSessionResponseType
      */
-    public function CreateSession(CreateSession $parameters)
+    public function createSession(CreateSession $parameters)
     {
         $response = $this->__soapCall('CreateSession', array($parameters));
 
@@ -59,7 +59,7 @@ class ReportClient extends SoapClient
      * @param KillSession $parameters
      * @return KillSessionResponseType
      */
-    public function KillSession(KillSession $parameters)
+    public function killSession(KillSession $parameters)
     {
         $response = $this->__soapCall('KillSession', array($parameters));
 
@@ -70,7 +70,7 @@ class ReportClient extends SoapClient
      * @param MonthlyTurnoverTotals $parameters
      * @return MonthlyTurnoverTotalsResponseType
      */
-    public function MonthlyTurnoverTotals(MonthlyTurnoverTotals $parameters)
+    public function monthlyTurnoverTotals(MonthlyTurnoverTotals $parameters)
     {
         $response = $this->__soapCall('MonthlyTurnoverTotals', array($parameters));
 
@@ -81,7 +81,7 @@ class ReportClient extends SoapClient
      * @param GetMerchants $parameters
      * @return GetMerchantsResponseType
      */
-    public function GetMerchants(GetMerchants $parameters)
+    public function getMerchants(GetMerchants $parameters)
     {
         $response = $this->__soapCall('GetMerchants', array($parameters));
 
@@ -92,7 +92,7 @@ class ReportClient extends SoapClient
      * @param SearchPayments $parameters
      * @return SearchPaymentsResponseType
      */
-    public function SearchPayments(SearchPayments $parameters)
+    public function searchPayments(SearchPayments $parameters)
     {
         $response = $this->__soapCall('SearchPayments', array($parameters));
 
@@ -103,7 +103,7 @@ class ReportClient extends SoapClient
      * @param GetPaymentMethods $parameters
      * @return GetPaymentMethodsResponseType
      */
-    public function GetPaymentMethods(GetPaymentMethods $parameters)
+    public function getPaymentMethods(GetPaymentMethods $parameters)
     {
         $response = $this->__soapCall('GetPaymentMethods', array($parameters));
 

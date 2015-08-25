@@ -48,7 +48,7 @@ class IcePay
         $this->prepareRequest($request);
 
         return $this->getSoapClient()
-            ->Checkout($request);
+            ->checkout($request);
     }
 
     /**
@@ -62,7 +62,7 @@ class IcePay
         $this->prepareRequest($request);
 
         return $this->getHttpClient()
-            ->Checkout($request);
+            ->checkout($request);
     }
 
     /**
@@ -88,7 +88,7 @@ class IcePay
     {
         $this->prepareRequest($request);
 
-        return $this->getSoapClient()->AutomaticCheckout($request);
+        return $this->getSoapClient()->automaticCheckout($request);
     }
 
     /**
@@ -103,7 +103,7 @@ class IcePay
         $this->prepareRequest($request);
 
         return $this->getSoapClient()
-            ->GetPayment($request);
+            ->getPayment($request);
     }
 
     /**
@@ -117,7 +117,7 @@ class IcePay
         $this->prepareRequest($request);
 
         return $this->getSoapClient()
-            ->GetMyPaymentMethods($request)
+            ->getMyPaymentMethods($request)
             ->getPaymentMethods();
     }
 

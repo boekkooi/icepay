@@ -33,7 +33,7 @@ class RefundClient extends SoapClient
      * @param RequestRefund $parameters
      * @return RequestRefundResponseType
      */
-    public function RequestRefund(RequestRefund $parameters)
+    public function requestRefund(RequestRefund $parameters)
     {
         $response = $this->__soapCall('RequestRefund', array($parameters));
 
@@ -44,7 +44,7 @@ class RefundClient extends SoapClient
      * @param CancelRefund $parameters
      * @return CancelRefundResponseType
      */
-    public function CancelRefund(CancelRefund $parameters)
+    public function cancelRefund(CancelRefund $parameters)
     {
         $response = $this->__soapCall('CancelRefund', array($parameters));
 
@@ -55,7 +55,7 @@ class RefundClient extends SoapClient
      * @param GetPaymentRefunds $parameters
      * @return GetPaymentRefundsResponseType
      */
-    public function GetPaymentRefunds(GetPaymentRefunds $parameters)
+    public function getPaymentRefunds(GetPaymentRefunds $parameters)
     {
         $response = $this->__soapCall('GetPaymentRefunds', array($parameters));
 
