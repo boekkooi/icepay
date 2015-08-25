@@ -26,7 +26,7 @@ class APCaptureClient extends SoapClient
      * @param CaptureFull $parameters
      * @return RequestAPCaptureResponseType
      */
-    public function CaptureFull(CaptureFull $parameters)
+    public function captureFull(CaptureFull $parameters)
     {
         $response = $this->__soapCall('CaptureFull', array($parameters));
 
@@ -37,7 +37,7 @@ class APCaptureClient extends SoapClient
      * @param CapturePartial $parameters
      * @return \stdClass
      */
-    public function CapturePartial(CapturePartial $parameters)
+    public function capturePartial(CapturePartial $parameters)
     {
         return $this->__soapCall('CapturePartial', array($parameters));
     }
