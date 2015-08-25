@@ -1,4 +1,5 @@
 # IcePay.com API Library
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/d5e23a3c-338c-4aef-adeb-5c71042d8a12/mini.png)](https://insight.sensiolabs.com/projects/d5e23a3c-338c-4aef-adeb-5c71042d8a12)
 
 IcePay API library for easy integration.
 
