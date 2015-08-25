@@ -29,6 +29,7 @@ class IcePayClient
         Assert::that($secretCode, null, 'secretCode')->notEmpty()->string();
 
         $this->secretCode = $secretCode;
+        $this->httpClient = $httpClient;
     }
 
     /**
