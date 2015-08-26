@@ -1,4 +1,5 @@
 # IcePay.com API Library
+[![Build Status](https://travis-ci.org/boekkooi/icepay.svg?branch=master)](https://travis-ci.org/boekkooi/icepay)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/d5e23a3c-338c-4aef-adeb-5c71042d8a12/mini.png)](https://insight.sensiolabs.com/projects/d5e23a3c-338c-4aef-adeb-5c71042d8a12)
 
 IcePay API library for easy integration.
